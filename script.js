@@ -11,6 +11,38 @@ function generatePassword(length, lowercase_flag, uppercase_flag, numeric_flag, 
   let password = ''
   let pool = []
 
+  if (typeof length !== "number") {
+    return "error: length is not a number"
+  }
+
+  if (length < 8) {
+    return "error: length is less than 8"
+  }
+
+  if (length > 128) {
+    return "error: length is greater than 128"
+  }
+
+  if (typeof lowercase_flag !== "boolean") {
+    return "error: lowercase_flag is not a boolean"
+  }
+
+  if (typeof uppercase_flag !== "boolean") {
+    return "error: uppercase_flag is not a boolean"
+  }
+
+  if (typeof numeric_flag !== "boolean") {
+    return "error: numeric_flag is not a boolean"
+  }
+
+  if (typeof special_flag !== "boolean") {
+    return "error: special_flag is not a boolean"
+  }
+
+  if (!lowercase_flag && !uppercase_flag && !numeric_flag && !special_flag) {
+    return "error: no character sets selected"
+  }
+    
   if (lowercase_flag) {
     pool = pool.concat(lowercase)
   }
@@ -27,8 +59,6 @@ function generatePassword(length, lowercase_flag, uppercase_flag, numeric_flag, 
     pool = pool.concat(special)
   }
 
-  console.log(pool)
-
   for (let i = 0; i < length; i++) {
     password = password + pool[Math.floor(Math.random() * pool.length)]
   }
@@ -38,7 +68,7 @@ function generatePassword(length, lowercase_flag, uppercase_flag, numeric_flag, 
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword(16, true, true, true, true);
+  var password = generatePassword(128, true, true, true, true);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
