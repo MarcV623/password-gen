@@ -68,7 +68,13 @@ function generatePassword(length, lowercase_flag, uppercase_flag, numeric_flag, 
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword(128, true, true, true, true);
+  let passwordlength = parseInt(document.querySelector("#passwordlength").value)
+  let lowercase_flag = document.querySelector("#lowercase_flag").checked
+  let uppercase_flag = document.querySelector("#uppercase_flag").checked
+  let numeric_flag = document.querySelector("#numeric_flag").checked
+  let special_flag = document.querySelector("#special_flag").checked
+  
+  var password = generatePassword(passwordlength, lowercase_flag, uppercase_flag, numeric_flag, special_flag);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
